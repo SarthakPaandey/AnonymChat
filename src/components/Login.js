@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Box, TextField, Button, Typography, Paper } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Paper,
+  Avatar,
+} from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -25,39 +33,88 @@ function Login() {
         height: "100%",
       }}
     >
-      <Paper elevation={3} sx={{ p: 4, width: 300 }}>
-        <Typography variant="h5" component="h1" gutterBottom>
-          Login
-        </Typography>
-        <form onSubmit={handleLogin}>
+      <Paper
+        elevation={3}
+        sx={{
+          p: 4,
+          width: 300,
+          borderRadius: "15px",
+          overflow: "hidden",
+        }}
+        className="animated-gradient"
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5" sx={{ color: "white" }}>
+            Sign in
+          </Typography>
+        </Box>
+        <Box component="form" onSubmit={handleLogin} sx={{ mt: 1 }}>
           <TextField
-            fullWidth
             margin="normal"
-            label="Email"
-            type="email"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "white" },
+                "&:hover fieldset": { borderColor: "white" },
+                "&.Mui-focused fieldset": { borderColor: "white" },
+              },
+              "& .MuiInputLabel-root": { color: "white" },
+              "& .MuiOutlinedInput-input": { color: "white" },
+            }}
           />
           <TextField
-            fullWidth
             margin="normal"
+            required
+            fullWidth
+            name="password"
             label="Password"
             type="password"
+            id="password"
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "white" },
+                "&:hover fieldset": { borderColor: "white" },
+                "&.Mui-focused fieldset": { borderColor: "white" },
+              },
+              "& .MuiInputLabel-root": { color: "white" },
+              "& .MuiOutlinedInput-input": { color: "white" },
+            }}
           />
           <Button
-            fullWidth
             type="submit"
+            fullWidth
             variant="contained"
-            color="primary"
-            sx={{ mt: 2 }}
+            sx={{
+              mt: 3,
+              mb: 2,
+              bgcolor: "rgba(255,255,255,0.3)",
+              color: "white",
+              "&:hover": { bgcolor: "rgba(255,255,255,0.5)" },
+            }}
           >
-            Login
+            Sign In
           </Button>
-        </form>
+        </Box>
       </Paper>
     </Box>
   );

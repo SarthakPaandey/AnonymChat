@@ -9,6 +9,7 @@ import {
   Avatar,
   Paper,
   Typography,
+  Divider,
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 
@@ -31,19 +32,32 @@ function UserList() {
   }, []);
 
   return (
-    <Paper elevation={3} sx={{ width: 250, mr: 2, overflow: "auto" }}>
-      <Typography variant="h6" sx={{ p: 2 }}>
+    <Paper
+      elevation={3}
+      sx={{
+        width: 250,
+        mr: 2,
+        overflow: "hidden",
+        borderRadius: "15px",
+      }}
+      className="animated-gradient"
+    >
+      <Typography
+        variant="h6"
+        sx={{ p: 2, color: "white", textAlign: "center" }}
+      >
         Online Users
       </Typography>
-      <List>
+      <Divider sx={{ bgcolor: "rgba(255, 255, 255, 0.2)" }} />
+      <List sx={{ maxHeight: "calc(70vh - 56px)", overflowY: "auto" }}>
         {users.map((user) => (
           <ListItem key={user.id}>
             <ListItemAvatar>
-              <Avatar>
-                <PersonIcon />
+              <Avatar sx={{ bgcolor: "rgba(255, 255, 255, 0.2)" }}>
+                <PersonIcon sx={{ color: "white" }} />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={user.id} />
+            <ListItemText primary={user.id} sx={{ color: "white" }} />
           </ListItem>
         ))}
       </List>

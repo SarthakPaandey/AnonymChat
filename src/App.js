@@ -7,19 +7,23 @@ import {
   CssBaseline,
   Box,
   Container,
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
 } from "@mui/material";
 import Login from "./components/Login";
 import Chat from "./components/Chat";
-import UserList from "./components/UserList";
+// import UserList from "./components/UserList"; // Removed import
+import "./App.css";
 
 const theme = createTheme({
   palette: {
-    mode: "dark",
     primary: {
-      main: "#90caf9",
+      main: "#ffffff",
     },
     secondary: {
-      main: "#f48fb1",
+      main: "#f50057",
     },
   },
 });
@@ -37,21 +41,53 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+  const handleLogout = () => {
+    auth.signOut();
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container maxWidth="lg">
-        <Box sx={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+      <Box
+        sx={{
+          flexGrow: 1,
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+        }}
+        className="animated-gradient"
+      >
+        <AppBar position="static" color="transparent" elevation={0}>
+          <Toolbar>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1 }}
+              className="animated-text"
+            >
+              Cool Chat App
+            </Typography>
+            {user && (
+              <Button color="inherit" onClick={handleLogout}>
+                Logout
+              </Button>
+            )}
+          </Toolbar>
+        </AppBar>
+        <Container
+          maxWidth="lg"
+          sx={{ mt: 2, flexGrow: 1, display: "flex", flexDirection: "column" }}
+        >
           {user ? (
-            <Box sx={{ display: "flex", flex: 1, mt: 2 }}>
-              <UserList />
+            <Box sx={{ display: "flex", flexGrow: 1 }}>
+              {/* <UserList /> */} {/* Removed UserList component */}
               <Chat user={user} />
             </Box>
           ) : (
             <Login />
           )}
-        </Box>
-      </Container>
+        </Container>
+      </Box>
     </ThemeProvider>
   );
 }
