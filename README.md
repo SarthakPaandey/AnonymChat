@@ -71,3 +71,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### Password
 User:a@x.com
 Password:123456
+User:b@x.com
+Password:123456
